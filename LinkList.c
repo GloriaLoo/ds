@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-// ×î»ù´¡µÄµ¥Á´±íÊµÏÖ 
+// æœ€åŸºç¡€çš„å•é“¾è¡¨çš„å®ç° 
 typedef struct Node{
 	int data;
 	struct Node *next;
 }Node;
 
-// ´òÓ¡Á´±í 
+// æ‰“å°é“¾è¡¨ 
 void printList(Node *head) {
 	if(!head) return;
 	Node* temp = head; 
@@ -18,7 +18,7 @@ void printList(Node *head) {
 	printf("\n");
 }
  
-// ³õÊ¼»¯Á´±í
+// åˆå§‹åŒ–é“¾è¡¨
 Node* initList() {
 	Node* head;	
 	head = (Node*) malloc (sizeof(Node));
@@ -26,7 +26,7 @@ Node* initList() {
 	return head;
 }
 
-// »ñÈ¡Á´±íµÄ³¤¶È 
+// è·å–é“¾è¡¨çš„é•¿åº¦ 
 int getLength(Node* head) {
 	if(!head) return 0;
 	Node* temp = head; 
@@ -38,40 +38,40 @@ int getLength(Node* head) {
 	return len;
 }
 
-// ÔÚÁ´±íµÚpos¸öÎ»ÖÃ²åÈëdata£¬pos´Ó1¿ªÊ¼ 
+// åœ¨é“¾è¡¨ç¬¬posä¸ªä½ç½®æ’å…¥dataï¼Œposä»1å¼€å§‹ 
 void insertAtPos(Node* head, int pos, int data) {
 	if(!head || pos < 1) return;
 	Node* temp = head;
 	int i = 0;
-	// ÕÒµ½posÇ°Ò»¸öÎ»ÖÃ 
+	// æ‰¾åˆ°poså‰ä¸€ä¸ªä½ç½® 
 	while(temp->next && i < pos-1) {
 		temp = temp->next;
 		i++;
 	}
 	if(pos > i+1) return;
-	// µ±temp->nextÎªnullÊ±£¬¼´tempÖ¸ÏòÁ´±í×îºóÒ»¸ö½Úµã£¬ÔÊĞíÔÚÁ´±íÄ©Î²²åÈë½Úµã
+	// å½“temp->nextä¸ºnullæ—¶ï¼Œå³tempæŒ‡å‘é“¾è¡¨æœ€åä¸€ä¸ªèŠ‚ç‚¹ï¼Œå…è®¸åœ¨é“¾è¡¨æœ«å°¾æ’å…¥èŠ‚ç‚¹
 	Node* newNode = initList();
 	newNode->data = data;
 	newNode->next = temp->next;
 	temp->next = newNode;
 }
 
-// ÔÚÁ´±íÎ²²¿²åÈë½Úµã 
+// åœ¨é“¾è¡¨å°¾éƒ¨æ’å…¥èŠ‚ç‚¹ 
 void insertAtEnd(Node* head, int data) {
 	insertAtPos(head, getLength(head)+1, data);
 }
 
-// ÔÚÁ´±íÍ·²¿²åÈë½Úµã 
+// åœ¨é“¾è¡¨å¤´éƒ¨æ’å…¥èŠ‚ç‚¹ 
 void insertAtHead(Node* head, int data) {
 	insertAtPos(head, 1, data);
 }
 
-// É¾³ıµÚpos¸ö½Úµã£¬pos´Ó1¿ªÊ¼ 
+// åˆ é™¤ç¬¬posä¸ªèŠ‚ç‚¹ï¼Œposä»1å¼€å§‹ 
 void deleteByPos(Node* head, int pos) {
 	if(!head || pos < 1 || !head->next) return;
 	Node* temp = head;
 	int i = 0;
-	// ÕÒµ½posÇ°Ò»¸öÎ»ÖÃ 
+	// æ‰¾åˆ°poså‰ä¸€ä¸ªä½ç½® 
 	while(temp->next && i < pos-1) {
 		temp = temp->next;
 		i++;
@@ -80,17 +80,17 @@ void deleteByPos(Node* head, int pos) {
 	temp->next = temp->next->next;
 } 
 
-// ÔÚÍ·²¿É¾³ı½Úµã
+// åœ¨å¤´éƒ¨åˆ é™¤èŠ‚ç‚¹
 void deleteTheHead(Node* head) {
 	deleteByPos(head, 1); 
 }
 
-// ÔÚÎ²²¿É¾³ı½Úµã 
+// åœ¨å°¾éƒ¨åˆ é™¤èŠ‚ç‚¹ 
 void deleteTheEnd(Node* head) {
 	deleteByPos(head, getLength(head));
 }
 
-// Äæ×ªÁ´±í
+// é€†è½¬é“¾è¡¨
 void changeoverList(Node* head) {
 	if(!head || !head->next->next) return;
 	Node* newHead = initList();
@@ -102,7 +102,7 @@ void changeoverList(Node* head) {
 	head->next = newHead->next;
 }
 
-// ½«Êı¾İ²åÈëÓĞĞòµÄÁ´±íÖĞ 
+// å°†æ•°æ®æ’å…¥æœ‰åºçš„é“¾è¡¨ä¸­ 
 void insertIntoSortedList(Node* head, int data) {
 	if(!head) return;
 	Node* temp = head;
@@ -114,7 +114,7 @@ void insertIntoSortedList(Node* head, int data) {
 	insertAtPos(head, pos, data);
 }
 
-// ÅÅĞò£¬½á¹ûÎªÉıĞò£¬Ö±½Ó²åÈëÅÅĞò 
+// æ’åºï¼Œç»“æœä¸ºå‡åºï¼Œç›´æ¥æ’å…¥æ’åº 
 void sortList(Node* head) {
 	if(!head || !head->next) return;
 	Node* temp = head;
@@ -126,24 +126,24 @@ void sortList(Node* head) {
 	head->next = newHead->next;
 }
 
-// ½«Á½Ìõ²»¼õÁ´±íºÏ²¢£¬·µ»ØÒ»ÌõĞÂÁ´±í 
+// å°†ä¸¤æ¡ä¸å‡é“¾è¡¨åˆå¹¶ï¼Œè¿”å›ä¸€æ¡æ–°é“¾è¡¨ 
 Node* mergeList(Node* headA, Node* headB) {
 	if(!headA || !headB) return NULL;
 	Node* temp = headA;
 	Node* temp2 = headB;
 	Node* newHead = initList();
-	while(temp->next) { // ÏÈ½«ÆäÖĞÒ»ÌõÁ´±í¸´ÖÆµ½ĞÂÁ´±íÖĞ 
+	while(temp->next) { // å…ˆå°†å…¶ä¸­ä¸€æ¡é“¾è¡¨å¤åˆ¶åˆ°æ–°é“¾è¡¨ä¸­ 
 		insertAtEnd(newHead, temp->next->data);
 		temp = temp->next;
 	}
-	while(temp2->next) {  // ÔÙ½«ÁíÍâÒ»ÌõÁ´±í½ÚµãÖğ¸ö²åÈëµ½ĞÂÁ´±íµÄºÏÊÊÎ»ÖÃ 
+	while(temp2->next) {  // å†å°†å¦å¤–ä¸€æ¡é“¾è¡¨èŠ‚ç‚¹é€ä¸ªæ’å…¥åˆ°æ–°é“¾è¡¨çš„åˆé€‚ä½ç½® 
 		insertIntoSortedList(newHead, temp2->next->data);
 		temp2 = temp2->next;
 	}
 	return newHead;
 }
 
-// ÅĞ¶ÏdataÊÇ·ñÔÚÁ´±íÖĞ£¬ÊÇÔò·µ»Ø1£¬·ñÔò·µ»Ø0 
+// åˆ¤æ–­dataæ˜¯å¦åœ¨é“¾è¡¨ä¸­ï¼Œæ˜¯åˆ™è¿”å›1ï¼Œå¦åˆ™è¿”å›0 
 int isExist(Node* head, int data) {
 	if(!head) return 0;
 	Node* temp = head;
@@ -154,7 +154,7 @@ int isExist(Node* head, int data) {
 	return 0;
 }
 
-// ÇóÁ½Á´±íµÄ½»¼¯£¬½«½á¹û´æ´¢ÔÚĞÂÁ´±í²¢·µ»Ø 
+// æ±‚ä¸¤é“¾è¡¨çš„äº¤é›†ï¼Œå°†ç»“æœå­˜å‚¨åœ¨æ–°é“¾è¡¨å¹¶è¿”å› 
 Node* getOverlapList(Node* headA, Node* headB) {
 	if(!headA || !headB) return NULL;
 	Node* temp1 = headA;
