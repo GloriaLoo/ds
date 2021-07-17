@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-// µ¥ÏòÑ­»·Á´±íµÄÊµÏÖ 
-// ×ÜÌåË¼ÏëºÍµ¥Á´±íÏàÍ¬£¬Ö»ÊÇÔÚ±éÀúÊ±Ìõ¼ş²»ÊÇtemp->next£¬¶øÊÇtemp->next != head 
+// å•å‘å¾ªç¯é“¾è¡¨çš„å®ç° 
+// æ€»ä½“æ€æƒ³å’Œå•é“¾è¡¨ç›¸åŒï¼Œåªæ˜¯åœ¨éå†æ—¶æ¡ä»¶ä¸æ˜¯temp->nextï¼Œè€Œæ˜¯temp->next != head 
 typedef struct Node{
 	int data;
 	struct Node *next;
 }Node;
 
-// ´òÓ¡Á´±í 
+// æ‰“å°é“¾è¡¨ 
 void printList(Node *head) {
 	if(!head) return;
 	Node* temp = head; 
 	printf("LinkList: \t");
-	while(temp->next != head) {  // ÕâÀïÓëµ¥Á´±í²»Í¬£¬µ¥Á´±í½öÓĞ temp->next
+	while(temp->next != head) {  // è¿™é‡Œä¸å•é“¾è¡¨ä¸åŒï¼Œå•é“¾è¡¨ä»…æœ‰ temp->next
 		printf("%d \t", temp->next->data);
 		temp = temp->next;
 	}
 	printf("\n");
 }
 
-// ³õÊ¼»¯Á´±í
+// åˆå§‹åŒ–é“¾è¡¨
 Node* initList() {
 	Node* head;	
 	head = (Node*) malloc (sizeof(Node));
@@ -27,7 +27,7 @@ Node* initList() {
 	return head;
 }
 
-// ´´½¨Ò»¸öĞÂ½Úµã£¬µ¥Á´±íÃ»ÓĞ´Ë·½·¨ 
+// åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹ï¼Œå•é“¾è¡¨æ²¡æœ‰æ­¤æ–¹æ³• 
 Node* getNewNode() {
 	Node* node;	
 	node = (Node*) malloc (sizeof(Node));
@@ -35,47 +35,47 @@ Node* getNewNode() {
 	return node;
 }
 
-// »ñÈ¡Á´±íµÄ³¤¶È 
+// è·å–é“¾è¡¨çš„é•¿åº¦ 
 int getLength(Node* head) {
 	if(!head) return 0;
 	Node* temp = head; 
 	int len = 0; 
-	while(temp->next != head) {  // ÕâÀïÓëµ¥Á´±í²»Í¬£¬µ¥Á´±í½öÓĞ temp->next
+	while(temp->next != head) {  // è¿™é‡Œä¸å•é“¾è¡¨ä¸åŒï¼Œå•é“¾è¡¨ä»…æœ‰ temp->next
 		len++;
 		temp = temp->next;
 	}
 	return len;
 }
 
-// ÔÚÁ´±íµÚpos¸öÎ»ÖÃ²åÈëdata£¬pos´Ó1¿ªÊ¼ 
+// åœ¨é“¾è¡¨ç¬¬posä¸ªä½ç½®æ’å…¥dataï¼Œposä»1å¼€å§‹ 
 void insertAtPos(Node* head, int pos, int data) {
 	if(!head || pos < 1) return;
 	Node* temp = head;
 	int i = 0;
-	// ÕÒµ½posÇ°Ò»¸öÎ»ÖÃ 
-	while((temp->next != head) && i < pos-1) {  // ÕâÀïÓëµ¥Á´±í²»Í¬£¬µ¥Á´±í½öÓĞ temp->next
+	// æ‰¾åˆ°poså‰ä¸€ä¸ªä½ç½® 
+	while((temp->next != head) && i < pos-1) {  // è¿™é‡Œä¸å•é“¾è¡¨ä¸åŒï¼Œå•é“¾è¡¨ä»…æœ‰ temp->next
 		temp = temp->next;
 		i++;
 	}
 	if(pos > i+1) return;
-	// µ±temp->nextÎªnullÊ±£¬¼´tempÖ¸ÏòÁ´±í×îºóÒ»¸ö½Úµã£¬ÔÊĞíÔÚÁ´±íÄ©Î²²åÈë½Úµã
+	// å½“temp->nextä¸ºnullæ—¶ï¼Œå³tempæŒ‡å‘é“¾è¡¨æœ€åä¸€ä¸ªèŠ‚ç‚¹ï¼Œå…è®¸åœ¨é“¾è¡¨æœ«å°¾æ’å…¥èŠ‚ç‚¹
 	Node* newNode = getNewNode();
 	newNode->data = data;
 	newNode->next = temp->next;
 	temp->next = newNode;
 }
 
-// ÔÚÁ´±íÎ²²¿²åÈë½Úµã 
+// åœ¨é“¾è¡¨å°¾éƒ¨æ’å…¥èŠ‚ç‚¹ 
 void insertAtEnd(Node* head, int data) {
 	insertAtPos(head, getLength(head)+1, data);
 }
 
-// ÔÚÁ´±íÍ·²¿²åÈë½Úµã 
+// åœ¨é“¾è¡¨å¤´éƒ¨æ’å…¥èŠ‚ç‚¹ 
 void insertAtHead(Node* head, int data) {
 	insertAtPos(head, 1, data);
 }
 
-// Äæ×ªÁ´±í
+// é€†è½¬é“¾è¡¨
 void changeoverList(Node* head) {
 	if(!head || !head->next->next) return;
 	Node* newHead = initList();
@@ -85,29 +85,29 @@ void changeoverList(Node* head) {
 		temp = temp->next;
 	}
 	Node* temp2 = newHead;
-	// ½«temp2Ö¸ÕëÖ¸ÏònewHead×îºóÒ»¸ö½Úµã 
+	// å°†temp2æŒ‡é’ˆæŒ‡å‘newHeadæœ€åä¸€ä¸ªèŠ‚ç‚¹ 
 	while(temp2->next != newHead)
 		temp2 = temp2->next;
-	// headÖ¸ÏòĞÂÁ´±í£¬ĞÂÁ´±íÎ²Ö¸ÕëÖ¸Ïòhead 
+	// headæŒ‡å‘æ–°é“¾è¡¨ï¼Œæ–°é“¾è¡¨å°¾æŒ‡é’ˆæŒ‡å‘head 
 	head->next = newHead->next;
 	temp2->next = head;
 }
 
 void main() {
-	printf("\n init list A, ");
+	printf("\n init list, ");
 	Node* list = initList();
 	for(int i = 1; i <= 6; i++) 
 		insertAtPos(list, i, i);
 	printList(list);
-	printf("\n insert A at end, ");
+	printf("\n insert at end, ");
 	insertAtEnd(list, 2);
 	printList(list);
 	
-	printf("\n insert A at head, ");
+	printf("\n insert at head, ");
 	insertAtHead(list, 5);
 	printList(list);
 	
-	printf("\n changeover list A, ");
+	printf("\n changeover list, ");
 	changeoverList(list);
 	printList(list);
 }
